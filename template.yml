@@ -1,0 +1,17 @@
+{{ $a := index .Methods 0 }}{{ $b := index .Methods 1 }}{{range $i, $r := .Resources}} {{.}}: {{ range $a }}
+  {{ .Name }}:
+      tags:
+        - "{{ guessTagFromPath $r }}"
+      summary: "{{ .Humanized }} {{ guessCollectionResourceFromPath $r }}"
+      responses: {{ range $code, $description := .Responses }}
+        {{ $code }}:
+          description: "{{ $description }}"{{end}}{{end}}
+  {{.}}/{id}: {{ range $b }}
+    {{ .Name }}:
+      tags:
+        - "{{ guessTagFromPath $r }}"
+      summary: "{{ .Humanized }} {{ guessSingularResourceFromPath $r }}"
+      responses: {{ range $code, $description := .Responses }}
+        {{ $code }}:
+          description: "{{ $description }}"{{end}}{{end}}
+{{end}}
