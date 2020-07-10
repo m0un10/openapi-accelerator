@@ -9,8 +9,14 @@ import (
 	pluralize "github.com/gertd/go-pluralize"
 )
 
-var specTemplate = `{{ $a := index .Methods 0 }}{{ $b := index .Methods 1 }}{{range $i, $r := .Resources}} {{.}}: {{ range $a }}
-  {{ .Name }}:
+var specTemplate = `openapi: 3.0.1
+info:
+  title: Generated API
+  description: "{{ generateDescription }}"
+  version: "0.1"
+paths:
+{{ $a := index .Methods 0 }}{{ $b := index .Methods 1 }}{{range $i, $r := .Resources}}  {{.}}: {{ range $a }}
+    {{ .Name }}:
       tags:
         - "{{ guessTagFromPath $r }}"
       summary: "{{ .Humanized }} {{ guessCollectionResourceFromPath $r }}"
@@ -21,12 +27,12 @@ var specTemplate = `{{ $a := index .Methods 0 }}{{ $b := index .Methods 1 }}{{ra
     {{ .Name }}:
       tags:
         - "{{ guessTagFromPath $r }}"
-	  summary: "{{ .Humanized }} {{ guessSingularResourceFromPath $r }}"
-	  parameters:
-       - name: id
-         in: path
-         required: true
-         schema:
+      summary: "{{ .Humanized }} {{ guessSingularResourceFromPath $r }}"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
             type : string
       responses: {{ range $code, $description := .Responses }}
         {{ $code }}:
@@ -75,6 +81,9 @@ func main() {
 		},
 		"guessSingularResourceFromPath": func(path string) string {
 			return p.Singular(path[strings.LastIndex(path, "/")+1:])
+		},
+		"generateDescription": func() string {
+			return "Created by '" + strings.Join(os.Args, " ") + "'"
 		},
 	}).Parse(specTemplate))
 	err := tmpl.Execute(os.Stdout, d)

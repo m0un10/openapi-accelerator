@@ -1,0 +1,281 @@
+openapi: 3.0.1
+info:
+  title: Generated API
+  description: "Created by './openapi-accelerator /community/advocates/catalog /community/families/catalog /community/kittens/catalog /admin/users /admin/groups'"
+  version: "0.1"
+paths:
+  /community/advocates/catalog: 
+    get:
+      tags:
+        - "community advocates"
+      summary: "List catalogs"
+      responses: 
+        501:
+          description: "Not implemented"
+    post:
+      tags:
+        - "community advocates"
+      summary: "Add to catalogs"
+      responses: 
+        501:
+          description: "Not implemented"
+  /community/advocates/catalog/{id}: 
+    get:
+      tags:
+        - "community advocates"
+      summary: "Retrieve a specific catalog"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : string
+      responses: 
+        501:
+          description: "Not implemented"
+    put:
+      tags:
+        - "community advocates"
+      summary: "Update a specific catalog"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : string
+      responses: 
+        501:
+          description: "Not implemented"
+    delete:
+      tags:
+        - "community advocates"
+      summary: "Delete a specific catalog"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : string
+      responses: 
+        501:
+          description: "Not implemented"
+  /community/families/catalog: 
+    get:
+      tags:
+        - "community families"
+      summary: "List catalogs"
+      responses: 
+        501:
+          description: "Not implemented"
+    post:
+      tags:
+        - "community families"
+      summary: "Add to catalogs"
+      responses: 
+        501:
+          description: "Not implemented"
+  /community/families/catalog/{id}: 
+    get:
+      tags:
+        - "community families"
+      summary: "Retrieve a specific catalog"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : string
+      responses: 
+        501:
+          description: "Not implemented"
+    put:
+      tags:
+        - "community families"
+      summary: "Update a specific catalog"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : string
+      responses: 
+        501:
+          description: "Not implemented"
+    delete:
+      tags:
+        - "community families"
+      summary: "Delete a specific catalog"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : string
+      responses: 
+        501:
+          description: "Not implemented"
+  /community/kittens/catalog: 
+    get:
+      tags:
+        - "community kittens"
+      summary: "List catalogs"
+      responses: 
+        501:
+          description: "Not implemented"
+    post:
+      tags:
+        - "community kittens"
+      summary: "Add to catalogs"
+      responses: 
+        501:
+          description: "Not implemented"
+  /community/kittens/catalog/{id}: 
+    get:
+      tags:
+        - "community kittens"
+      summary: "Retrieve a specific catalog"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : string
+      responses: 
+        501:
+          description: "Not implemented"
+    put:
+      tags:
+        - "community kittens"
+      summary: "Update a specific catalog"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : string
+      responses: 
+        501:
+          description: "Not implemented"
+    delete:
+      tags:
+        - "community kittens"
+      summary: "Delete a specific catalog"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : string
+      responses: 
+        501:
+          description: "Not implemented"
+  /admin/users: 
+    get:
+      tags:
+        - "admin"
+      summary: "List users"
+      responses: 
+        501:
+          description: "Not implemented"
+    post:
+      tags:
+        - "admin"
+      summary: "Add to users"
+      responses: 
+        501:
+          description: "Not implemented"
+  /admin/users/{id}: 
+    get:
+      tags:
+        - "admin"
+      summary: "Retrieve a specific user"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : string
+      responses: 
+        501:
+          description: "Not implemented"
+    put:
+      tags:
+        - "admin"
+      summary: "Update a specific user"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : string
+      responses: 
+        501:
+          description: "Not implemented"
+    delete:
+      tags:
+        - "admin"
+      summary: "Delete a specific user"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : string
+      responses: 
+        501:
+          description: "Not implemented"
+  /admin/groups: 
+    get:
+      tags:
+        - "admin"
+      summary: "List groups"
+      responses: 
+        501:
+          description: "Not implemented"
+    post:
+      tags:
+        - "admin"
+      summary: "Add to groups"
+      responses: 
+        501:
+          description: "Not implemented"
+  /admin/groups/{id}: 
+    get:
+      tags:
+        - "admin"
+      summary: "Retrieve a specific group"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : string
+      responses: 
+        501:
+          description: "Not implemented"
+    put:
+      tags:
+        - "admin"
+      summary: "Update a specific group"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : string
+      responses: 
+        501:
+          description: "Not implemented"
+    delete:
+      tags:
+        - "admin"
+      summary: "Delete a specific group"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : string
+      responses: 
+        501:
+          description: "Not implemented"
