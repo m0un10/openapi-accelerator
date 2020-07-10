@@ -1,61 +1,86 @@
 package main
 
 import (
-	"text/template"
 	"log"
 	"os"
 	"strings"
+	"text/template"
+
 	pluralize "github.com/gertd/go-pluralize"
 )
 
+var specTemplate = `{{ $a := index .Methods 0 }}{{ $b := index .Methods 1 }}{{range $i, $r := .Resources}} {{.}}: {{ range $a }}
+  {{ .Name }}:
+      tags:
+        - "{{ guessTagFromPath $r }}"
+      summary: "{{ .Humanized }} {{ guessCollectionResourceFromPath $r }}"
+      responses: {{ range $code, $description := .Responses }}
+        {{ $code }}:
+          description: "{{ $description }}"{{end}}{{end}}
+  {{.}}/{id}: {{ range $b }}
+    {{ .Name }}:
+      tags:
+        - "{{ guessTagFromPath $r }}"
+	  summary: "{{ .Humanized }} {{ guessSingularResourceFromPath $r }}"
+	  parameters:
+       - name: id
+         in: path
+         required: true
+         schema:
+            type : string
+      responses: {{ range $code, $description := .Responses }}
+        {{ $code }}:
+          description: "{{ $description }}"{{end}}{{end}}
+{{end}}`
+
 type Data struct {
 	Resources []string
-	Methods [][]Method
+	Methods   [][]Method
 }
 
 type Method struct {
-	Name string
+	Name      string
 	Humanized string
 	Responses map[string]string
 }
 
 var unimplementedResponse = map[string]string{
-	"501":"Not implemented",
+	"501": "Not implemented",
 }
 
 var defaultMethods = [][]Method{
 	[]Method{
-		Method{"get","List",unimplementedResponse},
-		Method{"post","Add to",unimplementedResponse},
+		Method{"get", "List", unimplementedResponse},
+		Method{"post", "Add to", unimplementedResponse},
 	},
 	[]Method{
-		Method{"get","Retrieve a specific",unimplementedResponse},
-		Method{"put","Update a specific",unimplementedResponse},
-		Method{"delete","Delete a specific",unimplementedResponse},
+		Method{"get", "Retrieve a specific", unimplementedResponse},
+		Method{"put", "Update a specific", unimplementedResponse},
+		Method{"delete", "Delete a specific", unimplementedResponse},
 	},
 }
 
-func main(){	
+func main() {
 	templateFile := "template.yml"
 	d := Data{
 		Resources: os.Args[1:],
-		Methods: defaultMethods,
+		Methods:   defaultMethods,
 	}
 	p := pluralize.NewClient()
-	tmpl := template.New(templateFile).Funcs(template.FuncMap{
+	tmpl := template.Must(template.New("generate").Funcs(template.FuncMap{
 		"guessTagFromPath": func(path string) string {
-		  return strings.TrimSpace(strings.Replace(path[0:strings.LastIndex(path,"/")],"/"," ",-1))
+			return strings.TrimSpace(strings.Replace(path[0:strings.LastIndex(path, "/")], "/", " ", -1))
 		},
 		"guessCollectionResourceFromPath": func(path string) string {
-			return p.Plural(path[strings.LastIndex(path,"/")+1:])
+			return p.Plural(path[strings.LastIndex(path, "/")+1:])
 		},
 		"guessSingularResourceFromPath": func(path string) string {
-			return p.Singular(path[strings.LastIndex(path,"/")+1:])
+			return p.Singular(path[strings.LastIndex(path, "/")+1:])
 		},
-	})
+	}).Parse(specTemplate))
 	tmpl, err := tmpl.ParseFiles(templateFile)
 	if err != nil {
-		log.Fatal("Invalid template: "+templateFile)
+		log.Fatal("Invalid template: " + templateFile)
 	}
 	err = tmpl.Execute(os.Stdout, d)
 	if err != nil {
