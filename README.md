@@ -5,25 +5,19 @@ This is a tactical tool for creating a skeleton for CRUD-based OpenAPI Definitio
 Say we needed CRUD APIs for 5 different resources (users, groups, advocates, families and kittens), we could simply run 
 
 ```
-./openapi-accelerator /admin/{users,groups} /community/{advocates,families,kitten}/catalog
+./openapi-accelerator /community/{advocates,families,kittens}/catalog /admin/{users,groups} 
 ```
 
-And it will generate an OpenAPI specification skeleton like this
+And it will generate an OpenAPI specification skeleton like [this](sample-output.yml)
 
-```
- families
- /home/families
-   POST - List families
-   GET - Add to families
- /home/families/{id}
-   POST - Delete a specific family
-   GET - Create a specific family
-   PUT - Update a specific family
-   DELETE - Delete a specific family
-```
-
-Notice that is actually determined the tags for grouping automatically and generated the descriptions with awareness of plural and singular words.
+You'll notice that it determines the tags for grouping automatically and generates descriptions with awareness of plural and singular words.
 
 ## Building the tool
 
 Nothing special, just the standard `go build`.
+
+## Viewing the docs
+
+Nothing special, just copy the output from the command and paste it at https://editor.swagger.io/
+
+
