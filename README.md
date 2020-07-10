@@ -2,7 +2,9 @@
 
 This is a tactical tool for creating a skeleton for CRUD-based OpenAPI Definitions in literally seconds.
 
-Say we needed CRUD APIs for 5 different resources (users, groups, advocates, families and kittens), we could simply run 
+Say we needed CRUD APIs for 5 different resources; let's say users, groups, advocates, families and kittens)...
+
+We could simply run 
 
 ```
 ./openapi-accelerator /community/{advocates,families,kittens}/catalog /admin/{users,groups} 
