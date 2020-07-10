@@ -61,7 +61,6 @@ var defaultMethods = [][]Method{
 }
 
 func main() {
-	templateFile := "template.yml"
 	d := Data{
 		Resources: os.Args[1:],
 		Methods:   defaultMethods,
@@ -78,11 +77,7 @@ func main() {
 			return p.Singular(path[strings.LastIndex(path, "/")+1:])
 		},
 	}).Parse(specTemplate))
-	tmpl, err := tmpl.ParseFiles(templateFile)
-	if err != nil {
-		log.Fatal("Invalid template: " + templateFile)
-	}
-	err = tmpl.Execute(os.Stdout, d)
+	err := tmpl.Execute(os.Stdout, d)
 	if err != nil {
 		log.Println(err)
 		log.Fatal("Unsupported inputs")
